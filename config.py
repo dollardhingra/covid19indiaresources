@@ -13,6 +13,7 @@ logging.basicConfig(
 # Telegram Constants
 # Default to a fake Telegram token for testing purposes if none is provided.
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", f"{'1' * 10}:{'A' * 35}")
+HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
 # Current message character limit is 4096
 # https://core.telegram.org/method/messages.sendMessage
 # https://limits.tginfo.me/en

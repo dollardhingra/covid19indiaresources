@@ -204,17 +204,28 @@ def main() -> None:
     logging.info("Handlers added to dispatcher.")
 
     # Start the Bot
-    updater.start_webhook(
-        listen="0.0.0.0",
-        port=int(PORT),
-        url_path=config.TELEGRAM_TOKEN,
-        webhook_url=f"https://covid19indiaresources.herokuapp.com/{config.TELEGRAM_TOKEN}"
-    )
+    # Run bot
+    if not config.HEROKU_APP_NAME:  # pooling mode
+        logging.info(
+            "Can't detect 'HEROKU_APP_NAME' env. Running bot in pooling mode.")
+        logging.info("Note: this is not a great way to deploy the bot in Heroku.")
 
-    # Run the bot until you press Ctrl-C or the process receives SIGINT,
-    # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
-    updater.idle()
+        updater.start_polling()
+        updater.idle()
+
+    else:  # webhook mode
+        logging.info(
+            f"Running bot in webhook mode. Make sure that this url is "
+            f"correct: https://{config.HEROKU_APP_NAME}.herokuapp.com/"
+        )
+        updater.start_webhook(
+            listen="0.0.0.0",
+            port=PORT,
+            url_path=config.TELEGRAM_TOKEN,
+            webhook_url=f"https://{config.HEROKU_APP_NAME}.herokuapp.com/{config.TELEGRAM_TOKEN}"
+        )
+
+        updater.idle()
 
 
 if __name__ == "__main__":
