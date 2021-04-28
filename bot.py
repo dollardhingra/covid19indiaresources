@@ -17,7 +17,7 @@ from telegram.ext import (
 )
 
 SELECT_CITY, SELECT_CITY_CUSTOM, SELECT_FILTERS = range(3)
-PORT = int(os.environ.get('PORT', 5000))
+PORT = int(os.environ.get('PORT', 88))
 
 
 def format_message_and_get_parse_mode(
