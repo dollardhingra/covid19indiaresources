@@ -17,7 +17,7 @@ from telegram.ext import (
 )
 
 SELECT_CITY, SELECT_CITY_CUSTOM, SELECT_FILTERS = range(3)
-PORT = int(os.environ.get('PORT', 88))
+PORT = int(os.environ.get('PORT', 8443))
 
 
 def format_message_and_get_parse_mode(
@@ -207,10 +207,8 @@ def main() -> None:
     updater.start_webhook(
         listen="0.0.0.0",
         port=int(PORT),
-        url_path=config.TELEGRAM_TOKEN
-    )
-    updater.bot.setWebhook(
-        'https://covid19indiaresources.herokuapp.com/' + config.TELEGRAM_TOKEN
+        url_path=config.TELEGRAM_TOKEN,
+        webhook_url=f"https://covid19indiaresources.herokuapp.com/{config.TELEGRAM_TOKEN}"
     )
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
