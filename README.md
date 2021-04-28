@@ -3,7 +3,7 @@ This is a telegram bot for searching covid19 resources like oxygen cylinders, ho
 beds, icu & ventilator beds, food and medicines on Twitter.
 
 ### Demo
-To add image here.
+![image](https://github.com/dollardhingra/covid19indiaresources/blob/master/about.gif)
 
 ### How to use this?
 * Install Telegram on your device(available on android, ios, windows, mac). 
@@ -26,7 +26,8 @@ to filter out the tweets requesting for the resources.**
 
 ### Contribution
 Feel free to contribute and improve the code. 
-Steps to run:
+
+**Steps to run:**
 * create a python virtual environment for python 3.7
 * install the requirements
     ```python
@@ -43,3 +44,11 @@ Steps to run:
     ```
     python main.py
     ```
+
+**Steps for creating a PR:**
+* create a new feature branch from master
+* do the changes
+* run black formatter
+* run Pylama
+* run unitests
+* commit and push, and then create a PR.
