@@ -1,3 +1,4 @@
+import os
 import logging
 from typing import Tuple
 
@@ -16,6 +17,7 @@ from telegram.ext import (
 )
 
 SELECT_CITY, SELECT_CITY_CUSTOM, SELECT_FILTERS = range(3)
+PORT = int(os.environ.get('PORT', 5000))
 
 
 def format_message_and_get_parse_mode(
@@ -202,7 +204,14 @@ def main() -> None:
     logging.info("Handlers added to dispatcher.")
 
     # Start the Bot
-    updater.start_polling()
+    updater.start_webhook(
+        listen="0.0.0.0",
+        port=int(PORT),
+        url_path=config.TELEGRAM_TOKEN
+    )
+    updater.bot.setWebhook(
+        'https://covid19indiaresources.herokuapp.com/' + config.TELEGRAM_TOKEN
+    )
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
